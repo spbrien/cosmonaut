@@ -9,11 +9,11 @@ from cosmonaut import run
 
 @click.command()
 @click.option('-b', '--bucket', help="S3 bucket target for deployment", prompt=True)
-@click.argument('dist', nargs=-1)
-def main(bucket, dist):
-    """Console script for sputnik."""
+@click.argument('files', nargs=-1)
+def main(bucket, files):
+    """Deploys static assets to S3."""
     click.echo(click.style("[+] Deploying...", bold=True, fg='white'))
-    run(bucket, dist)
+    run(bucket, files)
     return 0
 
 
