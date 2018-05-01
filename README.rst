@@ -20,7 +20,6 @@ Deploy static assets to S3
 
 
 * Free software: GNU General Public License v3
-* Documentation: https://cosmonaut.readthedocs.io.
 
 
 Features
