@@ -6,21 +6,20 @@ cosmonaut
 .. image:: https://img.shields.io/pypi/v/cosmonaut.svg
         :target: https://pypi.python.org/pypi/cosmonaut
 
-.. image:: https://img.shields.io/travis/spbrien/cosmonaut.svg
-        :target: https://travis-ci.org/spbrien/cosmonaut
-
-.. image:: https://readthedocs.org/projects/cosmonaut/badge/?version=latest
-        :target: https://cosmonaut.readthedocs.io/en/latest/?badge=latest
-        :alt: Documentation Status
-
-
-
 
 Deploy static assets to S3
 
 
 * Free software: GNU General Public License v3
 
+Installation
+--------
+
+To install cosmonaut, run this command in your terminal:
+
+.. code-block:: console
+
+    $ pip install cosmonaut --process-dependency-links
 
 Features
 --------
