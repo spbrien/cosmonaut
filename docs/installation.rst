@@ -12,7 +12,7 @@ To install cosmonaut, run this command in your terminal:
 
 .. code-block:: console
 
-    $ pip install cosmonaut
+    $ pip install cosmonaut --process-dependency-links
 
 This is the preferred method to install cosmonaut, as it will always install the most recent stable release.
 
