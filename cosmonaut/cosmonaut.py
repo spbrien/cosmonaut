@@ -12,7 +12,7 @@ mime = magic.Magic(mime=True)
 
 
 def get_bucket(name):
-    return bucketstore.get(name, create=False)
+    return bucketstore.get(name, create=True)
 
 def get_file_list(_dir):
     path = os.path.expanduser(_dir) if _dir.startswith('~') else _dir
