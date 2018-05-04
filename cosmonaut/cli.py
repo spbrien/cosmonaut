@@ -14,6 +14,7 @@ def main(bucket, files):
     """Deploys static assets to S3."""
     click.echo(click.style("[+] Deploying...", bold=True, fg='white'))
     run(bucket, files)
+    click.echo(click.style("\n[+] Finished\n", bold=True, fg='white'))
     return 0
 
 
