@@ -19,7 +19,7 @@ To install cosmonaut, run this command in your terminal:
 
 .. code-block:: console
 
-    $ pip install cosmonaut --process-dependency-links
+    $ pip install cosmonaut
 
 Features
 --------
