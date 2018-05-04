@@ -46,12 +46,12 @@ def clean_path(root):
     return cleaner
 
 
-def get_upload_data(root):
+def get_upload_data(root, single=False):
     cleaner = clean_path(root)
     for i in get_file_list(root):
         yield {
             'path': i,
-            'key': cleaner(i) if not os.path.isfile(i) else i,
+            'key': cleaner(i) if not single else i,
             'content_type': get_mime_type(i)
         }
 
@@ -77,5 +77,5 @@ def upload(bucket_name):
 def run(bucket, file_list):
     uploader = upload(bucket)
     for f in file_list:
-        data = get_upload_data(f)
+        data = get_upload_data(f, single=os.path.isfile(f))
         uploader(data)
