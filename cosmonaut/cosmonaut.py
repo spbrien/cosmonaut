@@ -4,9 +4,10 @@
 
 import os
 
-import bucketstore
 import magic
 import click
+
+import bucketstore
 
 mime = magic.Magic(mime=True)
 
