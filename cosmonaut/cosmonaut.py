@@ -67,9 +67,6 @@ def upload(bucket_name):
                     value,
                     content_type=i['content_type']
                 )
-                item = bucketstore.key(i['key'])
-                item.make_public()
-
                 click.echo(click.style("[-] Uploaded %s" % i['key'], bold=False))
 
     return uploader
