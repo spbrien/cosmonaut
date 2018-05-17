@@ -171,7 +171,9 @@ def get_upload_data(root, single=False):
 def upload(bucket_name):
     bucketstore = get_bucket(bucket_name)
 
-    def uploader(data, tags):
+    def uploader(data, tags, meta):
+        if tags:
+            meta['tags'] = json.dumps(tags.split(','))
         for i in data:
             with open(i['path'], 'rb') as f:
                 value = f.read()
@@ -179,9 +181,7 @@ def upload(bucket_name):
                     i['key'],
                     value,
                     content_type=i['content_type'],
-                    metadata={
-                        'tags': json.dumps(tags.split(',')) if tags else ''
-                    }
+                    metadata=meta
                 )
 
                 item = bucketstore.key(i['key'])
@@ -195,7 +195,11 @@ def upload(bucket_name):
 
 
 def run(bucket, file_list, tags=None, metadata=None):
+    meta = {
+        k: json.dumps(v) for k, v in metadata.iteritems()
+    } if metadata else {}
+
     uploader = upload(bucket)
     for f in file_list:
         data = get_upload_data(f, single=os.path.isfile(f))
-        uploader(data, tags)
+        uploader(data, tags, meta)

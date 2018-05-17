@@ -2,6 +2,7 @@
 
 """Console script for sputnik."""
 import sys
+import json
 import click
 
 from cosmonaut import run
@@ -30,7 +31,8 @@ from cosmonaut import run
 def main(bucket, tags, metadata, files):
     """Deploys static assets to S3."""
     click.echo(click.style("[+] Deploying...", bold=True, fg='white'))
-    run(bucket, files, tags=tags, metadata=metadata)
+    meta = json.loads(metadata) if metadata else None
+    run(bucket, files, tags=tags, metadata=meta)
     click.echo(click.style("\n[+] Finished\n", bold=True, fg='white'))
     return 0
 
