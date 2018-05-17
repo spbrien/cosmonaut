@@ -20,11 +20,17 @@ from cosmonaut import run
     help="Comma-separated list of tags to add to uploaded files",
     required=False
 )
+@click.option(
+    '-m',
+    '--metadata',
+    help="JSON metadata to add to uploaded files",
+    required=False
+)
 @click.argument('files', nargs=-1)
-def main(bucket, tags, files):
+def main(bucket, tags, metadata, files):
     """Deploys static assets to S3."""
     click.echo(click.style("[+] Deploying...", bold=True, fg='white'))
-    run(bucket, files, tags=tags)
+    run(bucket, files, tags=tags, metadata=metadata)
     click.echo(click.style("\n[+] Finished\n", bold=True, fg='white'))
     return 0
 

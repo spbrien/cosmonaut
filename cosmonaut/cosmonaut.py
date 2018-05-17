@@ -194,7 +194,7 @@ def upload(bucket_name):
     return uploader
 
 
-def run(bucket, file_list, tags=None):
+def run(bucket, file_list, tags=None, metadata=None):
     uploader = upload(bucket)
     for f in file_list:
         data = get_upload_data(f, single=os.path.isfile(f))
