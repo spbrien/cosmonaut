@@ -3,6 +3,7 @@
 """Main module."""
 
 import os
+import json
 
 import click
 
@@ -170,15 +171,19 @@ def get_upload_data(root, single=False):
 def upload(bucket_name):
     bucketstore = get_bucket(bucket_name)
 
-    def uploader(data):
+    def uploader(data, tags):
         for i in data:
             with open(i['path'], 'rb') as f:
                 value = f.read()
                 bucketstore.set(
                     i['key'],
                     value,
-                    content_type=i['content_type']
+                    content_type=i['content_type'],
+                    metadata={
+                        'tags': json.dumps(tags.split(',')) if tags else ''
+                    }
                 )
+
                 item = bucketstore.key(i['key'])
                 item.make_public()
 
@@ -189,8 +194,8 @@ def upload(bucket_name):
     return uploader
 
 
-def run(bucket, file_list):
+def run(bucket, file_list, tags=None):
     uploader = upload(bucket)
     for f in file_list:
         data = get_upload_data(f, single=os.path.isfile(f))
-        uploader(data)
+        uploader(data, tags)

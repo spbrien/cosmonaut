@@ -15,16 +15,16 @@ from cosmonaut import run
     prompt=True
 )
 @click.option(
-    '-metadata',
-    '--metadata',
-    help="JSON metadata to add to uploaded files",
+    '-t',
+    '--tags',
+    help="Comma-separated list of tags to add to uploaded files",
     required=False
 )
 @click.argument('files', nargs=-1)
-def main(bucket, metadata, files):
+def main(bucket, tags, files):
     """Deploys static assets to S3."""
     click.echo(click.style("[+] Deploying...", bold=True, fg='white'))
-    run(bucket, files)
+    run(bucket, files, tags=tags)
     click.echo(click.style("\n[+] Finished\n", bold=True, fg='white'))
     return 0
 
