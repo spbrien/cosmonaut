@@ -11,11 +11,9 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = ['boto3', 'Click>=6.0', 'python-magic']
-
-setup_requirements = [ ]
-
-test_requirements = [ ]
+requirements = ['boto3', 'Click>=6.0']
+setup_requirements = []
+test_requirements = []
 
 setup(
     author="Steven Brien",

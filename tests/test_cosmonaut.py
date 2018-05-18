@@ -20,15 +20,10 @@ class TestCosmonaut(unittest.TestCase):
     def tearDown(self):
         """Tear down test fixtures, if any."""
 
-    def test_000_something(self):
-        """Test something."""
-
-    def test_command_line_interface(self):
+    def test_help(self):
         """Test the CLI."""
         runner = CliRunner()
-        result = runner.invoke(cli.main)
-        assert result.exit_code == 0
-        assert 'cosmonaut.cli.main' in result.output
         help_result = runner.invoke(cli.main, ['--help'])
         assert help_result.exit_code == 0
-        assert '--help  Show this message and exit.' in help_result.output
+        assert 'Deploys static assets to S3.' in help_result.output
+        assert '--help' in help_result.output
