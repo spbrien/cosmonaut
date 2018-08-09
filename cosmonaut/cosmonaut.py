@@ -184,7 +184,10 @@ def upload(bucket_name, folder=None):
                     content_type=i['content_type'],
                     metadata=meta
                 )
+<<<<<<< HEAD
 
+=======
+>>>>>>> release/0.2.1
                 item = bucketstore.key(key)
                 item.make_public()
 
