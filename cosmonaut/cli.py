@@ -16,6 +16,12 @@ from cosmonaut import run
     prompt=True
 )
 @click.option(
+    '-f',
+    '--folder',
+    help="S3 bucket folder for deployment",
+    prompt=True
+)
+@click.option(
     '-t',
     '--tags',
     help="Comma-separated list of tags to add to uploaded files",
@@ -28,11 +34,11 @@ from cosmonaut import run
     required=False
 )
 @click.argument('files', nargs=-1)
-def main(bucket, tags, metadata, files):
+def main(bucket, folder, tags, metadata, files):
     """Deploys static assets to S3."""
     click.echo(click.style("[+] Deploying...", bold=True, fg='white'))
     meta = json.loads(metadata) if metadata else None
-    run(bucket, files, tags=tags, metadata=meta)
+    run(bucket, files, tags=tags, metadata=meta, folder=folder)
     click.echo(click.style("\n[+] Finished\n", bold=True, fg='white'))
     return 0
 

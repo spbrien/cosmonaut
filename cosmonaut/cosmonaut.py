@@ -168,38 +168,39 @@ def get_upload_data(root, single=False):
         }
 
 
-def upload(bucket_name):
+def upload(bucket_name, folder=None):
     bucketstore = get_bucket(bucket_name)
 
     def uploader(data, tags, meta):
         if tags:
             meta['tags'] = json.dumps(tags.split(','))
         for i in data:
+            key = '%s/%s' % (folder, i['key'])
             with open(i['path'], 'rb') as f:
                 value = f.read()
                 bucketstore.set(
-                    i['key'],
+                    key,
                     value,
                     content_type=i['content_type'],
                     metadata=meta
                 )
 
-                item = bucketstore.key(i['key'])
+                item = bucketstore.key(key)
                 item.make_public()
 
                 click.echo(
-                    click.style("[-] Uploaded %s" % i['key'], bold=False)
+                    click.style("[-] Uploaded %s" % key, bold=False)
                 )
 
     return uploader
 
 
-def run(bucket, file_list, tags=None, metadata=None):
+def run(bucket, file_list, tags=None, metadata=None, folder=None):
     meta = {
         k: json.dumps(v) for k, v in metadata.iteritems()
     } if metadata else {}
 
-    uploader = upload(bucket)
+    uploader = upload(bucket, folder=folder)
     for f in file_list:
         data = get_upload_data(f, single=os.path.isfile(f))
         uploader(data, tags, meta)
