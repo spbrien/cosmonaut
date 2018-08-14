@@ -148,7 +148,7 @@ def get_mime_type(f):
         'zip': 'application/zip'
     }
 
-    return types.get(file_extension, 'text/html')
+    return types.get(file_extension.replace('.', ''), 'text/html')
 
 
 def clean_path(root):
@@ -202,4 +202,6 @@ def run(bucket, file_list, tags=None, metadata=None, folder=None):
     uploader = upload(bucket, folder=folder)
     for f in file_list:
         data = get_upload_data(f, single=os.path.isfile(f))
+        print [i for i in data]
+        exit()
         uploader(data, tags, meta)
