@@ -202,6 +202,4 @@ def run(bucket, file_list, tags=None, metadata=None, folder=None):
     uploader = upload(bucket, folder=folder)
     for f in file_list:
         data = get_upload_data(f, single=os.path.isfile(f))
-        print [i for i in data]
-        exit()
         uploader(data, tags, meta)
